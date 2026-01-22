@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,49 +15,76 @@
         scroll-behavior: smooth;
       }
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          sans-serif;
+        font-family: system-ui, -apple-system, sans-serif;
         background-color: #f4f4f4;
         color: #333;
         line-height: 1.6;
       }
+
       /* --- 2. HEADER & SEARCH --- */
       header {
-        background-color: #008751; /* Your Brand Green */
-        
-        text-align: center;
+        background-color: #008751; /* Brand Green */
         padding: 30px 20px;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 2px solid #005a36;
       }
+
+      /* Logo and Text Container */
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .main-logo {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+      }
+
+      .header-text {
+        text-align: left;
+      }
+
       header h1 {
-    font-size: 1.8rem;
-    color: white; /* Header Title */
-    margin-bottom: 5px;
-}
-header p {
-    color: #e8f5e9; /* Light green sub-text */
-    font-size: 1rem;
-}
+        font-size: 1.8rem;
+        color: white;
+        margin: 0;
+        line-height: 1.2;
+      }
+
+      header p {
+        color: #e8f5e9;
+        font-size: 0.9rem;
+        margin: 0;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
       .search-box {
         padding: 15px;
         background: white;
-        position: sticky; /* Stays at top while scrolling */
+        position: sticky;
         top: 0;
         z-index: 1001;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       }
+
       #catalogSearch {
         width: 100%;
         padding: 15px;
         font-size: 1.1rem;
-        border: 2px solid #008751; /* Green border */
+        border: 2px solid #008751;
         border-radius: 8px;
       }
+
       /* --- 3. CATEGORY NAVIGATION --- */
       .category-bar {
         display: flex;
-        overflow-x: auto; /* Swipable on phones */
+        overflow-x: auto;
         background: #fff;
         padding: 10px;
         gap: 10px;
@@ -73,6 +100,7 @@ header p {
         font-weight: bold;
         font-size: 0.9rem;
       }
+
       /* --- 4. CATALOG GRID & CARDS --- */
       .section-title {
         padding: 20px;
@@ -95,10 +123,8 @@ header p {
       .product-image {
         width: 100%;
         height: 200px;
+        object-fit: cover; /* Makes your images look professional */
         background: #ddd;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
       .product-info {
         padding: 15px;
@@ -119,7 +145,8 @@ header p {
         font-size: 0.8rem;
         margin-right: 5px;
       }
-      /* --- 5. ACTION BUTTONS (The "Triple" Bar) --- */
+
+      /* --- 5. ACTION BUTTONS --- */
       .card-actions {
         display: flex;
         border-top: 1px solid #eee;
@@ -136,28 +163,30 @@ header p {
         flex-direction: column;
         gap: 4px;
       }
-      .btn-call {
-        background-color: #008751;
-      }
-      .btn-whatsapp {
-        background-color: #25d366;
-        border-left: 1px solid #fff3;
-      }
-      .btn-email {
-        background-color: #3498db;
-        border-left: 1px solid #fff3;
-      }
-      /* Class used to hide items during search */
-      .hidden {
-        display: none !important;
+      .btn-call { background-color: #008751; }
+      .btn-whatsapp { background-color: #25d366; border-left: 1px solid #fff3; }
+      .btn-email { background-color: #3498db; border-left: 1px solid #fff3; }
+
+      .hidden { display: none !important; }
+
+      /* Mobile Adjustment */
+      @media (max-width: 400px) {
+        .header-content { flex-direction: column; text-align: center; }
+        .header-text { text-align: center; }
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Namib Industrial</h1>
-      <p>Expert Tools • Local Service</p>
+      <div class="header-content">
+        <img src="logo.png" alt="Namib Industrial Logo" class="main-logo" />
+        <div class="header-text">
+          <h1>Namib Industrial</h1>
+          <p>Tools • Equipment • Hardware</p>
+        </div>
+      </div>
     </header>
+
     <div class="search-box">
       <input
         type="text"
@@ -166,18 +195,16 @@ header p {
         onkeyup="filterProducts()"
       />
     </div>
+
     <nav class="category-bar">
       <a href="#solar">☀️ Solar</a>
       <a href="#tools">🔧 Tools</a>
     </nav>
+
     <h2 class="section-title" id="solar">Solar Power</h2>
     <div class="catalog-grid">
       <div class="product-card">
-        <img
-          src="5kva-inverter.jpeg"
-          alt="5kW Solar Inverter"
-          class="product-image"
-        />
+        <img src="5kva-inverter.jpeg" alt="5kW Solar Inverter" class="product-image" />
         <div class="product-info">
           <h3>5kW Hybrid Inverter</h3>
           <p>Perfect for off-grid homes. High efficiency.</p>
@@ -187,30 +214,17 @@ header p {
           </div>
         </div>
         <div class="card-actions">
-          <a href="tel:+264811234567" class="btn-action btn-call"
-            ><span>📞</span>Call</a
-          >
-          <a
-            href="https://wa.me/264811234567?text=Interested in Inverter"
-            class="btn-action btn-whatsapp"
-            ><span>💬</span>WhatsApp</a
-          >
-          <a
-            href="mailto:info@namib.com.na?subject=Inquiry"
-            class="btn-action btn-email"
-            ><span>✉️</span>Email</a
-          >
+          <a href="tel:+264811234567" class="btn-action btn-call"><span>📞</span>Call</a>
+          <a href="https://wa.me/264811234567?text=Interested in Inverter" class="btn-action btn-whatsapp"><span>💬</span>WhatsApp</a>
+          <a href="mailto:info@namib.com.na?subject=Inquiry" class="btn-action btn-email"><span>✉️</span>Email</a>
         </div>
       </div>
     </div>
+
     <h2 class="section-title" id="tools">Hardware Tools</h2>
     <div class="catalog-grid">
       <div class="product-card">
-        <img
-          src="heavyduty-drill.jpeg"
-          alt="Heavy Duty Power Drill"
-          class="product-image"
-        />
+        <img src="heavyduty-drill.jpeg" alt="Heavy Duty Power Drill" class="product-image" />
         <div class="product-info">
           <h3>Heavy Duty Drill</h3>
           <p>Heavy-duty 220V power drill</p>
@@ -220,27 +234,16 @@ header p {
           </div>
         </div>
         <div class="card-actions">
-          <a href="tel:+264811234567" class="btn-action btn-call"
-            ><span>📞</span>Call</a
-          >
-          <a
-            href="https://wa.me/264811234567?text=Interested in Drill"
-            class="btn-action btn-whatsapp"
-            ><span>💬</span>WhatsApp</a
-          >
-          <a
-            href="mailto:info@namib.com.na?subject=Inquiry"
-            class="btn-action btn-email"
-            ><span>✉️</span>Email</a
-          >
+          <a href="tel:+264811234567" class="btn-action btn-call"><span>📞</span>Call</a>
+          <a href="https://wa.me/264811234567?text=Interested in Drill" class="btn-action btn-whatsapp"><span>💬</span>WhatsApp</a>
+          <a href="mailto:info@namib.com.na?subject=Inquiry" class="btn-action btn-email"><span>✉️</span>Email</a>
         </div>
       </div>
     </div>
+
     <script>
       function filterProducts() {
-        let input = document
-          .getElementById("catalogSearch")
-          .value.toLowerCase();
+        let input = document.getElementById("catalogSearch").value.toLowerCase();
         let cards = document.getElementsByClassName("product-card");
         for (let i = 0; i < cards.length; i++) {
           let cardText = cards[i].innerText.toLowerCase();
