@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Namibia Industrial Catalog - Solar, Tools, and Hardware in Windhoek.">
+    <meta
+      name="description"
+      content="Namibia Industrial Catalog - Solar, Tools, and Hardware in Windhoek."
+    />
     <title>Namibia Industrial Catalog</title>
     <style>
       /* --- 1. GLOBAL SETTINGS --- */
@@ -16,7 +19,10 @@
         scroll-behavior: smooth;
       }
       body {
-        font-family: system-ui, -apple-system, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
         background-color: #f4f4f4;
         color: #333;
         line-height: 1.6;
@@ -73,7 +79,7 @@
         position: sticky; /* Stays at top while scrolling */
         top: 0;
         z-index: 1001;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
       #catalogSearch {
@@ -83,7 +89,7 @@
         border: 2px solid #008751;
         border-radius: 8px;
         /* "search" type styling for iOS */
-        -webkit-appearance: none; 
+        -webkit-appearance: none;
       }
 
       /* --- 3. CATEGORY NAVIGATION --- */
@@ -96,7 +102,9 @@
         border-bottom: 1px solid #eee;
         scrollbar-width: none; /* Hides scrollbar on Firefox */
       }
-      .category-bar::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome */
+      .category-bar::-webkit-scrollbar {
+        display: none;
+      } /* Hides scrollbar on Chrome */
 
       .category-bar a {
         flex: 0 0 auto;
@@ -109,10 +117,10 @@
         font-size: 0.9rem;
         border: 1px solid #ddd;
       }
-      
+
       .category-bar a:active {
-          background-color: #008751;
-          color: white;
+        background-color: #008751;
+        color: white;
       }
 
       /* --- 4. CATALOG GRID & CARDS --- */
@@ -125,14 +133,14 @@
         margin-bottom: 10px;
         background-color: #f4f4f4; /* Ensures text is readable over background */
       }
-      
+
       .catalog-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 20px;
         padding: 0 20px 20px;
       }
-      
+
       .product-card {
         background: white;
         border-radius: 12px;
@@ -142,9 +150,9 @@
         flex-direction: column;
         transition: transform 0.2s; /* Subtle animation */
       }
-      
+
       .product-card:active {
-          transform: scale(0.98); /* Tactile feel on phone tap */
+        transform: scale(0.98); /* Tactile feel on phone tap */
       }
 
       .product-image {
@@ -153,19 +161,19 @@
         object-fit: cover;
         background: #eeeeee;
       }
-      
+
       .product-info {
         padding: 15px;
         flex-grow: 1;
       }
-      
+
       .product-price {
         font-size: 1.4rem;
         color: #008751;
         font-weight: 800;
         margin: 10px 0;
       }
-      
+
       .tag {
         display: inline-block;
         background: #e8f5e9;
@@ -182,7 +190,7 @@
         display: flex;
         border-top: 1px solid #eee;
       }
-      
+
       .btn-action {
         flex: 1;
         text-align: center;
@@ -198,34 +206,49 @@
         gap: 4px;
         line-height: 1;
       }
-      
-      .btn-call { background-color: #008751; }
-      .btn-whatsapp { background-color: #25d366; border-left: 1px solid rgba(255,255,255,0.3); }
-      .btn-email { background-color: #3498db; border-left: 1px solid rgba(255,255,255,0.3); }
+
+      .btn-call {
+        background-color: #008751;
+      }
+      .btn-whatsapp {
+        background-color: #25d366;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .btn-email {
+        background-color: #3498db;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+      }
 
       /* --- 6. FOOTER & UTILS --- */
       footer {
-          margin-top: auto; /* Pushes footer to bottom */
-          background-color: #333;
-          color: #aaa;
-          text-align: center;
-          padding: 30px 20px;
-          font-size: 0.9rem;
+        margin-top: auto; /* Pushes footer to bottom */
+        background-color: #008751;
+        color: #aaa;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 0.9rem;
       }
 
-      .hidden { display: none !important; }
-      
+      .hidden {
+        display: none !important;
+      }
+
       #no-results {
-          text-align: center;
-          padding: 40px;
-          color: #666;
-          font-style: italic;
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        font-style: italic;
       }
 
       /* Mobile Adjustment */
       @media (max-width: 400px) {
-        .header-content { flex-direction: column; text-align: center; }
-        .header-text { text-align: center; }
+        .header-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        .header-text {
+          text-align: center;
+        }
       }
     </style>
   </head>
@@ -254,15 +277,20 @@
       <a href="#tools">🔧 Tools</a>
       <a href="#contact">📍 Contact</a>
     </nav>
-    
+
     <div id="no-results" class="hidden">
-        No products found matching your search.
+      No products found matching your search.
     </div>
 
     <h2 class="section-title" id="solar">Solar Power</h2>
     <div class="catalog-grid">
       <div class="product-card">
-        <img src="5kva-inverter.jpeg" alt="5kW Solar Inverter" class="product-image" onerror="this.src='https://placehold.co/600x400?text=No+Image'"/>
+        <img
+          src="5kva-inverter.jpeg"
+          alt="5kW Solar Inverter"
+          class="product-image"
+          onerror="this.src = 'https://placehold.co/600x400?text=No+Image'"
+        />
         <div class="product-info">
           <h3>5kW Hybrid Inverter</h3>
           <p>Perfect for off-grid homes. High efficiency.</p>
@@ -272,9 +300,19 @@
           </div>
         </div>
         <div class="card-actions">
-          <a href="tel:+264811234567" class="btn-action btn-call"><span>📞</span>Call</a>
-          <a href="https://wa.me/264811234567?text=Interested in Inverter" class="btn-action btn-whatsapp"><span>💬</span>App</a>
-          <a href="mailto:info@namib.com.na?subject=Inquiry" class="btn-action btn-email"><span>✉️</span>Email</a>
+          <a href="tel:+264811234567" class="btn-action btn-call"
+            ><span>📞</span>Call</a
+          >
+          <a
+            href="https://wa.me/264811234567?text=Interested in Inverter"
+            class="btn-action btn-whatsapp"
+            ><span>💬</span>App</a
+          >
+          <a
+            href="mailto:info@namib.com.na?subject=Inquiry"
+            class="btn-action btn-email"
+            ><span>✉️</span>Email</a
+          >
         </div>
       </div>
     </div>
@@ -282,7 +320,12 @@
     <h2 class="section-title" id="tools">Hardware Tools</h2>
     <div class="catalog-grid">
       <div class="product-card">
-        <img src="heavyduty-drill.jpeg" alt="Heavy Duty Power Drill" class="product-image" onerror="this.src='https://placehold.co/600x400?text=No+Image'"/>
+        <img
+          src="heavyduty-drill.jpeg"
+          alt="Heavy Duty Power Drill"
+          class="product-image"
+          onerror="this.src = 'https://placehold.co/600x400?text=No+Image'"
+        />
         <div class="product-info">
           <h3>Heavy Duty Drill</h3>
           <p>Heavy-duty 220V power drill</p>
@@ -292,23 +335,35 @@
           </div>
         </div>
         <div class="card-actions">
-          <a href="tel:+264811234567" class="btn-action btn-call"><span>📞</span>Call</a>
-          <a href="https://wa.me/264811234567?text=Interested in Drill" class="btn-action btn-whatsapp"><span>💬</span>App</a>
-          <a href="mailto:info@namib.com.na?subject=Inquiry" class="btn-action btn-email"><span>✉️</span>Email</a>
+          <a href="tel:+264811234567" class="btn-action btn-call"
+            ><span>📞</span>Call</a
+          >
+          <a
+            href="https://wa.me/264811234567?text=Interested in Drill"
+            class="btn-action btn-whatsapp"
+            ><span>💬</span>App</a
+          >
+          <a
+            href="mailto:info@namib.com.na?subject=Inquiry"
+            class="btn-action btn-email"
+            ><span>✉️</span>Email</a
+          >
         </div>
       </div>
     </div>
 
     <footer id="contact">
-        <p><strong>Namib Industrial Supplies</strong></p>
-        <p>Windhoek, Namibia</p>
-        <br>
-        <p style="font-size: 0.8rem;">&copy; 2025 All Rights Reserved.</p>
+      <p><strong>Namib Industrial Supplies</strong></p>
+      <p>Windhoek, Namibia</p>
+      <br />
+      <p style="font-size: 0.8rem">&copy; 2025 All Rights Reserved.</p>
     </footer>
 
     <script>
       function filterProducts() {
-        let input = document.getElementById("catalogSearch").value.toLowerCase();
+        let input = document
+          .getElementById("catalogSearch")
+          .value.toLowerCase();
         let cards = document.getElementsByClassName("product-card");
         let foundCount = 0;
 
@@ -325,9 +380,9 @@
         // Toggle the "No Results" message
         let noResultsMsg = document.getElementById("no-results");
         if (foundCount === 0) {
-            noResultsMsg.classList.remove("hidden");
+          noResultsMsg.classList.remove("hidden");
         } else {
-            noResultsMsg.classList.add("hidden");
+          noResultsMsg.classList.add("hidden");
         }
       }
     </script>
