@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Namibia Industrial Catalog</title>
+    <style>
+      /* --- 1. GLOBAL SETTINGS --- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+      }
+      /* --- 2. HEADER & SEARCH --- */
+      header {
+        background-color: white;
+        text-align: center;
+        padding: 30px 20px;
+        border-bottom: 1px solid #ddd;
+      }
+      .search-box {
+        padding: 15px;
+        background: white;
+        position: sticky; /* Stays at top while scrolling */
+        top: 0;
+        z-index: 1001;
+      }
+      #catalogSearch {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1rem;
+        border: 2px solid #008751; /* Green border */
+        border-radius: 8px;
+      }
+      /* --- 3. CATEGORY NAVIGATION --- */
+      .category-bar {
+        display: flex;
+        overflow-x: auto; /* Swipable on phones */
+        background: #fff;
+        padding: 10px;
+        gap: 10px;
+        border-bottom: 1px solid #eee;
+      }
+      .category-bar a {
+        flex: 0 0 auto;
+        padding: 8px 15px;
+        background: #eee;
+        text-decoration: none;
+        color: #333;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+      /* --- 4. CATALOG GRID & CARDS --- */
+      .section-title {
+        padding: 20px;
+        color: #008751;
+      }
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+      .product-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+      }
+      .product-image {
+        width: 100%;
+        height: 200px;
+        background: #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .product-info {
+        padding: 15px;
+        flex-grow: 1;
+      }
+      .product-price {
+        font-size: 1.4rem;
+        color: #008751;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      .tag {
+        display: inline-block;
+        background: #e8f5e9;
+        color: #008751;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin-right: 5px;
+      }
+      /* --- 5. ACTION BUTTONS (The "Triple" Bar) --- */
+      .card-actions {
+        display: flex;
+        border-top: 1px solid #eee;
+      }
+      .btn-action {
+        flex: 1;
+        text-align: center;
+        padding: 12px 5px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .btn-call {
+        background-color: #008751;
+      }
+      .btn-whatsapp {
+        background-color: #25d366;
+        border-left: 1px solid #fff3;
+      }
+      .btn-email {
+        background-color: #3498db;
+        border-left: 1px solid #fff3;
+      }
+      /* Class used to hide items during search */
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Namib Industrial</h1>
+      <p>Expert Tools • Local Service</p>
+    </header>
+    <div class="search-box">
+      <input
+        type="text"
+        id="catalogSearch"
+        placeholder="Search items (e.g. 'Solar')..."
+        onkeyup="filterProducts()"
+      />
+    </div>
+    <nav class="category-bar">
+      <a href="#solar">☀️ Solar</a>
+      <a href="#tools">🔧 Tools</a>
+    </nav>
+    <h2 class="section-title" id="solar">Solar Power</h2>
+    <div class="catalog-grid">
+      <div class="product-card">
+        <img
+          src="5kva-inverter.jpeg"
+          alt="5kW Solar Inverter"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h3>5kW Hybrid Inverter</h3>
+          <p>Perfect for off-grid homes. High efficiency.</p>
+          <div class="product-price">N$ 12,500</div>
+          <div>
+            <span class="tag">#Solar</span><span class="tag">#New</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="tel:+264811234567" class="btn-action btn-call"
+            ><span>📞</span>Call</a
+          >
+          <a
+            href="https://wa.me/264811234567?text=Interested in Inverter"
+            class="btn-action btn-whatsapp"
+            ><span>💬</span>WhatsApp</a
+          >
+          <a
+            href="mailto:info@namib.com.na?subject=Inquiry"
+            class="btn-action btn-email"
+            ><span>✉️</span>Email</a
+          >
+        </div>
+      </div>
+    </div>
+    <h2 class="section-title" id="tools">Hardware Tools</h2>
+    <div class="catalog-grid">
+      <div class="product-card">
+        <img
+          src="heavyduty-drill.jpeg"
+          alt="Heavy Duty Power Drill"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h3>Heavy Duty Drill</h3>
+          <p>Heavy-duty 220V power drill</p>
+          <div class="product-price">N$ 2,100</div>
+          <div>
+            <span class="tag">#Tools</span><span class="tag">#Sale</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="tel:+264811234567" class="btn-action btn-call"
+            ><span>📞</span>Call</a
+          >
+          <a
+            href="https://wa.me/264811234567?text=Interested in Drill"
+            class="btn-action btn-whatsapp"
+            ><span>💬</span>WhatsApp</a
+          >
+          <a
+            href="mailto:info@namib.com.na?subject=Inquiry"
+            class="btn-action btn-email"
+            ><span>✉️</span>Email</a
+          >
+        </div>
+      </div>
+    </div>
+    <script>
+      function filterProducts() {
+        let input = document
+          .getElementById("catalogSearch")
+          .value.toLowerCase();
+        let cards = document.getElementsByClassName("product-card");
+        for (let i = 0; i < cards.length; i++) {
+          let cardText = cards[i].innerText.toLowerCase();
+          if (cardText.includes(input)) {
+            cards[i].classList.remove("hidden");
+          } else {
+            cards[i].classList.add("hidden");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
