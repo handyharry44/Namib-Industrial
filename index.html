@@ -83,19 +83,20 @@
         letter-spacing: 1px;
       }
 
-      /* --- 3. UPDATED FILTER SECTION (The "Dropdown" Fix) --- */
+      /* --- 3. UPDATED FILTER SECTION --- */
       .filter-section {
         background: white;
         position: sticky;
         top: 0;
         z-index: 1000;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid #eee;
       }
 
       .filter-toggle {
-        display: none; /* Hidden on desktop */
+        display: none; /* Desktop hidden */
         width: 100%;
-        padding: 15px 20px;
+        padding: 15px;
         background: white;
         border: none;
         font-weight: bold;
@@ -112,7 +113,7 @@
         display: flex;
         padding: 15px;
         gap: 10px;
-        align-items: flex-end; /* Aligns inputs nicely on desktop */
+        transition: all 0.3s ease-in-out;
       }
 
       .date-group {
@@ -121,38 +122,28 @@
         flex: 1;
       }
 
-      .search-input {
-        flex: 2;
-      }
+      /* --- 4. MOBILE SPECIFIC OVERRIDES --- */
+      @media (max-width: 600px) {
+        /* HEADER ALIGNMENT FIX */
+        .header-content {
+          flex-direction: column; /* Stacks items vertically */
+          text-align: center; /* Centers the text */
+          gap: 10px;
+        }
 
-      .search-input,
-      .date-input {
-        padding: 10px;
-        font-size: 0.9rem;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        width: 100%;
-      }
-
-      /* MOBILE SPECIFIC OVERRIDES */
-      @media (max-width: 768px) {
         .filter-toggle {
-          display: flex;
+          display: flex; /* Show dropdown button on mobile */
         }
 
         .filter-container {
-          display: none; /* Hide by default on mobile */
+          display: none; /* Hide controls until toggled */
           flex-direction: column;
-          padding: 10px 20px 20px;
-          animation: slideDown 0.3s ease-out;
+          padding: 0 15px 15px 15px;
         }
 
         .filter-container.active {
           display: flex;
-        }
-
-        .date-group {
-          width: 100%;
+          animation: slideDown 0.3s ease-out;
         }
       }
 
@@ -167,18 +158,21 @@
         }
       }
 
-      /* --- 4. CARDS & CONTENT --- */
+      .search-input,
+      .date-input {
+        padding: 10px;
+        font-size: 0.9rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        flex: 1;
+      }
+
+      /* --- 5. GRID & CARDS --- */
       .main-container {
         max-width: 1100px;
         margin: 0 auto;
         padding: 20px;
         width: 100%;
-      }
-
-      .catalog-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 25px;
       }
 
       .section-title {
@@ -187,6 +181,12 @@
         border-bottom: 2px solid #ddd;
         padding-bottom: 5px;
         text-transform: uppercase;
+      }
+
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
       }
 
       .searchable-item {
@@ -249,7 +249,7 @@
         color: #666;
       }
 
-      /* --- 5. MODAL --- */
+      /* --- 6. MODAL --- */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -279,7 +279,6 @@
         right: 20px;
         font-size: 2rem;
         cursor: pointer;
-        color: #333;
       }
       .hidden {
         display: none !important;
@@ -330,7 +329,7 @@
           type="search"
           id="searchInput"
           class="search-input"
-          placeholder="🔍 Search news & tools..."
+          placeholder="Search news & tools..."
           onkeyup="runSearch()"
         />
         <div class="date-group">
@@ -352,7 +351,6 @@
 
     <div class="main-container">
       <h2 class="section-title">Industry Insights & Articles</h2>
-
       <div class="catalog-grid" id="mainGrid">
         <article
           class="searchable-item article-card"
@@ -375,15 +373,9 @@
             </p>
             <div class="hidden-full-content hidden">
               <p>
-                The project involved 200 high-efficiency panels and a
-                centralized battery storage system. By utilizing the intense
-                Namibian sun, we've reduced carbon emissions significantly.
+                This project utilized high-efficiency panels to reduce carbon
+                emissions by over 40 tons annually.
               </p>
-              <br />
-              <img
-                src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600"
-                style="width: 100%; border-radius: 10px"
-              />
             </div>
             <div>
               <span class="tag">#Solar</span><span class="tag">#Namibia</span>
@@ -408,13 +400,13 @@
             <span class="article-date">Dec 10, 2023</span>
             <h3 class="item-title">Top 5 Safety Protocols for Site Managers</h3>
             <p class="article-excerpt">
-              Safety isn't just a policy; it's a culture. Essential gear and
-              checks for 2024...
+              Safety isn't just a policy; it's a culture. We break down the gear
+              for 2024...
             </p>
             <div class="hidden-full-content hidden">
               <p>
-                1. Always check PPE integrity. 2. Clear communication. 3.
-                Regular tool calibration. 4. Hydration in heat.
+                Core protocols include PPE integrity, hydration in the Namibian
+                heat, and regular tool calibration.
               </p>
             </div>
             <div>
@@ -437,11 +429,10 @@
     </div>
 
     <footer>
-      <p>&copy; 2026 Namib Industrial News - Views - Supplies</p>
+      <p>&copy; 2026 Namib Industrial Supplies - Windhoek, Namibia</p>
     </footer>
 
     <script>
-      // 1. SEARCH & DATE FILTER LOGIC
       function runSearch() {
         const query = document
           .getElementById("searchInput")
@@ -479,7 +470,6 @@
         }
       }
 
-      // 2. MODAL LOGIC (READ MORE)
       function openModal(button) {
         const card = button.closest(".article-card");
         const title = card.querySelector(".item-title").innerText;
@@ -492,8 +482,8 @@
         document.getElementById("modalBody").innerHTML = `
           <img src="${imageSrc}" style="width:100%; height:300px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
           <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
-          <h2 style="margin: 10px 0 20px 0;">${title}</h2>
-          <div style="line-height:1.8; color:#444;">${fullContent}</div>
+          <h2 style="margin: 10px 0 10px 0;">${title}</h2>
+          <div style="line-height:1.6; color:#444;">${fullContent}</div>
         `;
         document.getElementById("modalOverlay").style.display = "flex";
         document.body.style.overflow = "hidden";
@@ -504,7 +494,6 @@
         document.body.style.overflow = "auto";
       }
 
-      // 3. TOGGLE FILTER MENU
       function toggleFilter() {
         const controls = document.getElementById("filterControls");
         const icon = document.getElementById("toggle-icon");
