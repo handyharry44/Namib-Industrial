@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,9 +13,16 @@
         --light-bg: #f4f4f4;
       }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
       body {
-        font-family: system-ui, -apple-system, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
         background-color: var(--light-bg);
         color: #333;
         display: flex;
@@ -45,7 +52,7 @@
         background: white;
         border-radius: 50%;
         padding: 5px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         flex-shrink: 0;
       }
 
@@ -56,12 +63,25 @@
       }
 
       @keyframes rotateSun {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
-      .header-text h1 { color: white; font-size: 1.8rem; margin: 0; }
-      .header-text p { color: #e8f5e9; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+      .header-text h1 {
+        color: white;
+        font-size: 1.8rem;
+        margin: 0;
+      }
+      .header-text p {
+        color: #e8f5e9;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
 
       /* --- 3. FILTER BAR --- */
       .filter-section {
@@ -70,7 +90,7 @@
         top: 0;
         z-index: 100;
         padding: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
 
       .filter-container {
@@ -82,17 +102,28 @@
       }
 
       .search-input {
-        flex: 2; min-width: 200px; padding: 12px;
-        border: 2px solid #ddd; border-radius: 8px;
+        flex: 2;
+        min-width: 200px;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
       }
 
       .date-input {
-        flex: 1; min-width: 140px; padding: 12px;
-        border: 1px solid #ddd; border-radius: 8px;
+        flex: 1;
+        min-width: 140px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
       }
 
       /* --- 4. CARDS & GRID --- */
-      .main-container { max-width: 1100px; margin: 0 auto; padding: 20px; width: 100%; }
+      .main-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+      }
       .catalog-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -114,16 +145,34 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         border: 1px solid #eee;
       }
 
       /* Article Specifics */
-      .article-card { border-top: 5px solid var(--brand-blue); }
-      .article-img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
-      .article-body { padding: 20px; flex-grow: 1; }
-      .article-date { font-size: 0.8rem; color: #888; font-weight: bold; }
-      .article-excerpt { font-size: 0.95rem; color: #555; margin: 10px 0; }
+      .article-card {
+        border-top: 5px solid var(--brand-blue);
+      }
+      .article-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+      .article-body {
+        padding: 20px;
+        flex-grow: 1;
+      }
+      .article-date {
+        font-size: 0.8rem;
+        color: #888;
+        font-weight: bold;
+      }
+      .article-excerpt {
+        font-size: 0.95rem;
+        color: #555;
+        margin: 10px 0;
+      }
 
       .btn-read-more {
         background: none;
@@ -137,7 +186,10 @@
         margin-top: 10px;
       }
 
-      .btn-read-more:hover { background: var(--brand-blue); color: white; }
+      .btn-read-more:hover {
+        background: var(--brand-blue);
+        color: white;
+      }
 
       .tag {
         display: inline-block;
@@ -152,8 +204,11 @@
       /* --- 5. MODAL (READ MORE POPUP) --- */
       .modal-overlay {
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.8);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
         display: none; /* Hidden by default */
         justify-content: center;
         align-items: center;
@@ -174,87 +229,165 @@
 
       .close-modal {
         position: absolute;
-        top: 15px; right: 20px;
+        top: 15px;
+        right: 20px;
         font-size: 2rem;
         cursor: pointer;
         color: #333;
       }
 
-      .hidden { display: none !important; }
+      .hidden {
+        display: none !important;
+      }
 
       /* --- 6. FOOTER --- */
-      footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: auto; }
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 30px;
+        margin-top: auto;
+      }
     </style>
   </head>
   <body>
-
     <header>
       <div class="header-content">
         <div class="logo-wrapper">
           <svg class="sun-logo" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="30" fill="none" stroke="#f39c12" stroke-width="8" stroke-dasharray="12 6" />
+            <circle
+              cx="50"
+              cy="50"
+              r="30"
+              fill="none"
+              stroke="#f39c12"
+              stroke-width="8"
+              stroke-dasharray="12 6"
+            />
             <circle cx="50" cy="50" r="22" fill="#ffcc00" />
             <circle cx="50" cy="50" r="12" fill="#f39c12" />
           </svg>
         </div>
         <div class="header-text">
-          <h1>Namib Industrial</h1>
-          <p>Excellence in Engineering • Windhoek</p>
+          <h1>Industry-Link-Namibia</h1>
+          <p>Excellence in Engineering: News - Views - Products</p>
         </div>
       </div>
     </header>
 
     <div class="filter-section">
       <div class="filter-container">
-        <input type="search" id="searchInput" class="search-input" placeholder="🔍 Search news & tools..." onkeyup="runSearch()">
-        <input type="date" id="dateStart" class="date-input" onchange="runSearch()">
-        <input type="date" id="dateEnd" class="date-input" onchange="runSearch()">
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="🔍 Search news & tools..."
+          onkeyup="runSearch()"
+        />
+        <input
+          type="date"
+          id="dateStart"
+          class="date-input"
+          onchange="runSearch()"
+        />
+        <input
+          type="date"
+          id="dateEnd"
+          class="date-input"
+          onchange="runSearch()"
+        />
       </div>
     </div>
 
     <div class="main-container">
       <h2 class="section-title">Industry Insights & Articles</h2>
-      
+
       <div class="catalog-grid" id="mainGrid">
-        
-        <article class="searchable-item article-card" data-tags="solar, installation" data-date="2024-01-15">
-          <img src="https://images.unsplash.com/photo-1509391366360-fe5bb6058827?auto=format&fit=crop&w=600" class="article-img" alt="Solar">
+        <article
+          class="searchable-item article-card"
+          data-tags="solar, installation"
+          data-date="2024-01-15"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1509391366360-fe5bb6058827?auto=format&fit=crop&w=600"
+            class="article-img"
+            alt="Solar"
+          />
           <div class="article-body">
             <span class="article-date">Jan 15, 2024</span>
-            <h3 class="item-title">Sustainable Solar Power in the Erongo Region</h3>
-            <p class="article-excerpt">Our team recently completed one of the largest off-grid solar arrays in Western Namibia, providing power to over 50 households...</p>
+            <h3 class="item-title">
+              Sustainable Solar Power in the Erongo Region
+            </h3>
+            <p class="article-excerpt">
+              Our team recently completed one of the largest off-grid solar
+              arrays in Western Namibia, providing power to over 50
+              households...
+            </p>
             <div class="hidden-full-content hidden">
-              <p>The project involved 200 high-efficiency panels and a centralized battery storage system. By utilizing the intense Namibian sun, we've reduced carbon emissions by approximately 40 tons per year. The local community has been trained to perform basic maintenance, ensuring long-term sustainability.</p>
-              <br>
-              <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600" style="width:100%; border-radius:10px;">
+              <p>
+                The project involved 200 high-efficiency panels and a
+                centralized battery storage system. By utilizing the intense
+                Namibian sun, we've reduced carbon emissions by approximately 40
+                tons per year. The local community has been trained to perform
+                basic maintenance, ensuring long-term sustainability.
+              </p>
+              <br />
+              <img
+                src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600"
+                style="width: 100%; border-radius: 10px"
+              />
             </div>
-            <div><span class="tag">#Solar</span><span class="tag">#Namibia</span></div>
-            <button class="btn-read-more" onclick="openModal(this)">Read Full Article</button>
+            <div>
+              <span class="tag">#Solar</span><span class="tag">#Namibia</span>
+            </div>
+            <button class="btn-read-more" onclick="openModal(this)">
+              Read Full Article
+            </button>
           </div>
         </article>
 
-        <article class="searchable-item article-card" data-tags="tools, safety" data-date="2023-12-10">
-          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600" class="article-img" alt="Safety">
+        <article
+          class="searchable-item article-card"
+          data-tags="tools, safety"
+          data-date="2023-12-10"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600"
+            class="article-img"
+            alt="Safety"
+          />
           <div class="article-body">
             <span class="article-date">Dec 10, 2023</span>
             <h3 class="item-title">Top 5 Safety Protocols for Site Managers</h3>
-            <p class="article-excerpt">Safety isn't just a policy; it's a culture. We break down the essential gear and checks for 2024...</p>
+            <p class="article-excerpt">
+              Safety isn't just a policy; it's a culture. We break down the
+              essential gear and checks for 2024...
+            </p>
             <div class="hidden-full-content hidden">
-              <p>Site safety in the industrial sector remains our top priority. 1. Always check PPE integrity. 2. Ensure clear communication via high-vis signaling. 3. Regular tool calibration. 4. Hydration in the Namib heat. 5. Clear emergency exit routes. Following these simple steps reduces site accidents by 65%.</p>
+              <p>
+                Site safety in the industrial sector remains our top priority.
+                1. Always check PPE integrity. 2. Ensure clear communication via
+                high-vis signaling. 3. Regular tool calibration. 4. Hydration in
+                the Namib heat. 5. Clear emergency exit routes. Following these
+                simple steps reduces site accidents by 65%.
+              </p>
             </div>
-            <div><span class="tag">#Safety</span><span class="tag">#Industrial</span></div>
-            <button class="btn-read-more" onclick="openModal(this)">Read Full Article</button>
+            <div>
+              <span class="tag">#Safety</span
+              ><span class="tag">#Industrial</span>
+            </div>
+            <button class="btn-read-more" onclick="openModal(this)">
+              Read Full Article
+            </button>
           </div>
         </article>
-
       </div>
     </div>
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
       <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div id="modalBody">
-          </div>
+        <div id="modalBody"></div>
       </div>
     </div>
 
@@ -265,7 +398,9 @@
     <script>
       // 1. SEARCH & DATE FILTER LOGIC
       function runSearch() {
-        const query = document.getElementById("searchInput").value.toLowerCase();
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
         const start = document.getElementById("dateStart").value;
         const end = document.getElementById("dateEnd").value;
         const items = document.getElementsByClassName("searchable-item");
@@ -274,7 +409,7 @@
           let text = item.innerText.toLowerCase();
           let tags = item.getAttribute("data-tags").toLowerCase();
           let itemDate = new Date(item.getAttribute("data-date"));
-          
+
           let matchesText = text.includes(query) || tags.includes(query);
           let matchesStart = start ? itemDate >= new Date(start) : true;
           let matchesEnd = end ? itemDate <= new Date(end) : true;
@@ -289,11 +424,13 @@
 
       // 2. MODAL LOGIC (READ MORE)
       function openModal(button) {
-        const card = button.closest('.article-card');
-        const title = card.querySelector('.item-title').innerText;
-        const date = card.querySelector('.article-date').innerText;
-        const imageSrc = card.querySelector('.article-img').src;
-        const fullContent = card.querySelector('.hidden-full-content').innerHTML;
+        const card = button.closest(".article-card");
+        const title = card.querySelector(".item-title").innerText;
+        const date = card.querySelector(".article-date").innerText;
+        const imageSrc = card.querySelector(".article-img").src;
+        const fullContent = card.querySelector(
+          ".hidden-full-content",
+        ).innerHTML;
 
         // Build the content inside the Modal
         document.getElementById("modalBody").innerHTML = `
