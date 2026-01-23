@@ -24,7 +24,7 @@
         min-height: 100vh;
       }
 
-      /* --- 2. HEADER & ANIMATED SUN --- */
+      /* --- 2. HEADER --- */
       header {
         background-color: var(--brand-green);
         padding: 30px 15px;
@@ -81,34 +81,29 @@
 
       .search-input, .date-input { padding: 10px; font-size: 0.9rem; border: 1px solid #ddd; border-radius: 6px; flex: 1; min-width: 0; }
 
-      /* --- 5. IMAGE & HOVER ZOOM LOGIC --- */
+      /* --- 5. IMAGE & HOVER EFFECTS --- */
       .img-container {
         position: relative; 
         width: 100%;
         height: 200px;
-        overflow: hidden; /* THE SECRET: keeps the zoom INSIDE the box */
+        overflow: hidden;
       }
-
       .article-img { 
         width: 100%; 
         height: 100%; 
         object-fit: cover;
-        transition: transform 0.4s ease; /* Smoothly animate the zoom */
+        transition: transform 0.4s ease;
       }
-
-      /* Trigger zoom when the user hovers over the WHOLE card */
       .searchable-item:hover .article-img {
-        transform: scale(1.1); /* Zoom in by 10% */
+        transform: scale(1.1);
       }
-
       .img-overlay {
         position: absolute;
         bottom: 0; left: 0; width: 100%; height: 60%;
         background: linear-gradient(transparent, rgba(0,0,0,0.7));
         pointer-events: none;
-        z-index: 1; /* Sits above the image but below the tag */
+        z-index: 1;
       }
-
       .category-tag {
         position: absolute;
         bottom: 15px;
@@ -120,7 +115,7 @@
         font-size: 0.75rem;
         font-weight: bold;
         text-transform: uppercase;
-        z-index: 2; /* Keeps text on the very top */
+        z-index: 2;
       }
 
       /* --- 6. GRID & CARDS --- */
@@ -139,22 +134,36 @@
         width: 100%; 
         transition: box-shadow 0.3s ease;
       }
-
-      /* Make the card shadow glow slightly on hover too */
       .searchable-item:hover {
         box-shadow: 0 8px 15px rgba(0,0,0,0.15);
       }
-
       .article-card { border-top: 5px solid var(--brand-blue); }
       .article-body { padding: 20px; flex-grow: 1; }
       .article-date { font-size: 0.8rem; color: #888; font-weight: bold; }
       .btn-read-more { background: none; border: 2px solid var(--brand-blue); color: var(--brand-blue); padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
-      /* --- 7. MODAL --- */
+      /* --- 7. MODAL & ZOOM UI --- */
       .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 10px; }
       .modal-content { background: white; width: 100%; max-width: 600px; max-height: 85vh; border-radius: 15px; overflow-y: auto; position: relative; padding: 20px; }
-      .close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; cursor: pointer; }
+      .close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; cursor: pointer; z-index: 10; }
       .hidden { display: none !important; }
+
+      /* ZOOM STYLES */
+      .modal-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        cursor: zoom-in;
+        transition: transform 0.3s ease, height 0.3s ease;
+      }
+      .modal-image.zoomed {
+        transform: scale(1.5); /* Grow the image */
+        height: 400px;        /* Give it more space */
+        cursor: zoom-out;
+        object-fit: contain;  /* Show the whole image when zoomed */
+      }
 
       footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: auto; }
     </style>
@@ -205,7 +214,7 @@
             <h3 class="item-title">Sustainable Solar Power</h3>
             <p>Providing power to Western Namibia households.</p>
             <div class="hidden-full-content hidden">
-              <p>Full content text for the modal popup goes here.</p>
+              <p>This project involved state-of-the-art battery arrays designed for high-heat desert environments.</p>
             </div>
             <button class="btn-read-more" onclick="openModal(this)">Read More</button>
           </div>
@@ -222,7 +231,7 @@
             <h3 class="item-title">Top 5 Safety Protocols</h3>
             <p>Safety culture and essential gear for site managers.</p>
             <div class="hidden-full-content hidden">
-              <p>Full content text for the modal popup goes here.</p>
+              <p>Site safety remains paramount in the harsh industrial landscapes of Namibia.</p>
             </div>
             <button class="btn-read-more" onclick="openModal(this)">Read More</button>
           </div>
@@ -263,10 +272,23 @@
       function openModal(button) {
         const card = button.closest(".article-card");
         const title = card.querySelector(".item-title").innerText;
-        const full = card.querySelector(".hidden-full-content").innerHTML;
-        document.getElementById("modalBody").innerHTML = `<h2>${title}</h2><br>${full}`;
+        const date = card.querySelector(".article-date").innerText;
+        const imageSrc = card.querySelector(".article-img").src;
+        const fullContent = card.querySelector(".hidden-full-content").innerHTML;
+
+        document.getElementById("modalBody").innerHTML = `
+          <img src="${imageSrc}" class="modal-image" onclick="toggleZoom(this)">
+          <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
+          <h2 style="margin: 10px 0 10px 0;">${title}</h2>
+          <div style="line-height:1.6; color:#444;">${fullContent}</div>
+        `;
         document.getElementById("modalOverlay").style.display = "flex";
         document.body.style.overflow = "hidden";
+      }
+
+      // NEW: Function to toggle the zoom class
+      function toggleZoom(imgElement) {
+        imgElement.classList.toggle("zoomed");
       }
 
       function closeModal() {
