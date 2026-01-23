@@ -1,13 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Namibia Industrial Catalog - Solar, Tools, and Hardware in Windhoek."
-    />
-    <title>Namibia Industrial Catalog</title>
+    <meta name="description" content="Namibia Industrial Catalog & News">
+    <title>Namibia Industrial - Full Demo</title>
     <style>
       /* --- 1. GLOBAL SETTINGS --- */
       * {
@@ -19,23 +16,20 @@
         scroll-behavior: smooth;
       }
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          sans-serif;
+        font-family: system-ui, -apple-system, sans-serif;
         background-color: #f4f4f4;
         color: #333;
         line-height: 1.6;
         display: flex;
         flex-direction: column;
-        min-height: 100vh; /* Ensures footer stays at bottom */
+        min-height: 100vh;
       }
 
-      /* --- 2. HEADER & SEARCH --- */
+      /* --- 2. HEADER --- */
       header {
-        background-color: #008751; /* Brand Green */
+        background-color: #008751;
         padding: 30px 20px;
-        border-bottom: 2px solid #005a36;
+        border-bottom: 4px solid #ce1126; /* Namibia Flag Red Accent */
       }
 
       .header-content {
@@ -47,117 +41,130 @@
         margin: 0 auto;
       }
 
-      .main-logo {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
-      }
-
-      .header-text {
-        text-align: left;
-      }
-
-      header h1 {
+      .header-text h1 {
         font-size: 1.8rem;
         color: white;
         margin: 0;
-        line-height: 1.2;
       }
 
-      header p {
+      .header-text p {
         color: #e8f5e9;
         font-size: 0.9rem;
-        margin: 0;
-        letter-spacing: 1px;
         text-transform: uppercase;
+        letter-spacing: 1px;
       }
 
-      .search-box {
-        padding: 15px;
+      /* --- 3. SEARCH & FILTERS SECTION --- */
+      /* I grouped the text search and date search into one sticky bar */
+      .filter-section {
         background: white;
-        position: sticky; /* Stays at top while scrolling */
+        position: sticky;
         top: 0;
-        z-index: 1001;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-
-      #catalogSearch {
-        width: 100%;
+        z-index: 1000;
         padding: 15px;
-        font-size: 1.1rem;
-        border: 2px solid #008751;
-        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       }
 
-      /* --- 3. CATEGORY NAVIGATION --- */
+      .filter-container {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      /* Main Text Search */
+      .search-input {
+        flex: 2;
+        min-width: 200px;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+      
+      .search-input:focus {
+        border-color: #008751;
+        outline: none;
+      }
+
+      /* Date Inputs */
+      .date-input {
+        flex: 1;
+        min-width: 130px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        color: #555;
+        font-family: inherit;
+      }
+
+      /* --- 4. NAVIGATION TABS --- */
       .category-bar {
         display: flex;
-        overflow-x: auto;
+        justify-content: center;
         background: #fff;
         padding: 10px;
         gap: 10px;
         border-bottom: 1px solid #eee;
-        scrollbar-width: none; /* Hides scrollbar on Firefox */
+        overflow-x: auto;
       }
-      .category-bar::-webkit-scrollbar {
-        display: none;
-      } /* Hides scrollbar on Chrome */
 
       .category-bar a {
-        flex: 0 0 auto;
-        padding: 8px 15px;
-        background: #f0f0f0;
+        padding: 8px 16px;
+        background: #f8f9fa;
         text-decoration: none;
         color: #333;
         border-radius: 20px;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 0.9rem;
         border: 1px solid #ddd;
+        white-space: nowrap;
+      }
+      
+      .category-bar a:hover {
+          background-color: #e2e6ea;
       }
 
-      .category-bar a:active {
-        background-color: #008751;
-        color: white;
+      /* --- 5. GRID LAYOUT --- */
+      .main-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 20px;
       }
 
-      /* --- 4. CATALOG GRID & CARDS --- */
-      .section-title {
-        padding: 20px 20px 5px;
+      .section-label {
         color: #008751;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin: 30px 0 20px;
         text-transform: uppercase;
-        font-size: 1.2rem;
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 10px;
-        background-color: #f4f4f4; /* Ensures text is readable over background */
+        letter-spacing: 1px;
       }
 
       .catalog-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-        padding: 0 20px 20px;
+        gap: 25px;
       }
 
+      /* --- 6. PRODUCT CARD (Buying) --- */
       .product-card {
         background: white;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         display: flex;
         flex-direction: column;
-        transition: transform 0.2s; /* Subtle animation */
-      }
-
-      .product-card:active {
-        transform: scale(0.98); /* Tactile feel on phone tap */
+        border: 1px solid #eee;
       }
 
       .product-image {
         width: 100%;
-        height: 220px;
+        height: 200px;
         object-fit: cover;
-        background: #eeeeee;
+        background: #eee;
       }
 
       .product-info {
@@ -165,25 +172,13 @@
         flex-grow: 1;
       }
 
-      .product-price {
-        font-size: 1.4rem;
+      .price {
         color: #008751;
         font-weight: 800;
-        margin: 10px 0;
+        font-size: 1.2rem;
+        margin-top: 5px;
       }
 
-      .tag {
-        display: inline-block;
-        background: #e8f5e9;
-        color: #008751;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        margin-right: 5px;
-      }
-
-      /* --- 5. ACTION BUTTONS --- */
       .card-actions {
         display: flex;
         border-top: 1px solid #eee;
@@ -191,196 +186,337 @@
 
       .btn-action {
         flex: 1;
+        padding: 12px 0;
         text-align: center;
-        padding: 15px 5px;
         text-decoration: none;
         color: white;
         font-weight: bold;
         font-size: 0.8rem;
+      }
+      .btn-call { background: #008751; }
+      .btn-wa { background: #25d366; }
+      .btn-email { background: #3498db; }
+
+      /* --- 7. ARTICLE CARD (Reading - NEW TEMPLATE) --- */
+      /* Note: This has the specific styles for your articles */
+      
+      .article-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        line-height: 1;
+        /* Green border on left to distinguish it from a product */
+        border-left: 5px solid #008751; 
+        transition: transform 0.2s;
       }
 
-      .btn-call {
-        background-color: #008751;
-      }
-      .btn-whatsapp {
-        background-color: #25d366;
-        border-left: 1px solid rgba(255, 255, 255, 0.3);
-      }
-      .btn-email {
-        background-color: #3498db;
-        border-left: 1px solid rgba(255, 255, 255, 0.3);
+      .article-card:hover {
+        transform: translateY(-3px);
       }
 
-      /* --- 6. FOOTER & UTILS --- */
-      footer {
-        margin-top: auto; /* Pushes footer to bottom */
-        background-color: #008751;
-        color: white;
-        text-align: center;
-        padding: 30px 20px;
-        font-size: 0.9rem;
+      .article-media {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
       }
 
-      .hidden {
-        display: none !important;
+      .article-main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
+      /* Mini gallery for articles with multiple images */
+      .article-gallery-strip {
+        display: flex;
+        height: 60px;
+        background: #000;
+      }
+      .article-gallery-strip img {
+        flex: 1;
+        object-fit: cover;
+        opacity: 0.7;
+        border-right: 1px solid white;
+      }
+
+      .article-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .article-meta {
+        font-size: 0.8rem;
+        color: #888;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .article-title {
+        font-size: 1.25rem;
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+        line-height: 1.3;
+      }
+
+      .article-excerpt {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 15px;
+        flex-grow: 1;
+      }
+
+      /* Unified Tag Styling */
+      .tag-container {
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid #f0f0f0;
+      }
+      
+      .tag {
+        display: inline-block;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 3px 10px;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      /* --- 8. UTILITIES --- */
+      .hidden { display: none !important; }
+      
       #no-results {
         text-align: center;
         padding: 40px;
-        color: #666;
+        color: #777;
         font-style: italic;
+        width: 100%;
       }
 
-      /* Mobile Adjustment */
-      @media (max-width: 400px) {
-        .header-content {
-          flex-direction: column;
-          text-align: center;
-        }
-        .header-text {
-          text-align: center;
-        }
+      footer {
+        margin-top: auto;
+        background: #333;
+        color: #aaa;
+        text-align: center;
+        padding: 20px;
       }
     </style>
   </head>
   <body>
+
     <header>
       <div class="header-content">
-        <img src="logo.png" alt="Namib Industrial Logo" class="main-logo" />
+        <div style="font-size:3rem;">🇳🇦</div>
         <div class="header-text">
           <h1>Namib Industrial</h1>
-          <p>Tools • Equipment • Hardware</p>
+          <p>Catalog & News Feed</p>
         </div>
       </div>
     </header>
 
-    <div class="search-box">
-      <input
-        type="search"
-        id="catalogSearch"
-        placeholder="🔍 Search items (e.g. 'Solar')..."
-        onkeyup="filterProducts()"
-      />
+    <div class="filter-section">
+      <div class="filter-container">
+        <input 
+          type="search" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="🔍 Search products or articles..." 
+          onkeyup="runSearch()"
+        />
+        
+        <input 
+          type="date" 
+          id="dateStart" 
+          class="date-input" 
+          title="From Date"
+          onchange="runSearch()"
+        />
+
+        <input 
+          type="date" 
+          id="dateEnd" 
+          class="date-input" 
+          title="To Date"
+          onchange="runSearch()"
+        />
+      </div>
     </div>
 
     <nav class="category-bar">
-      <a href="#solar">☀️ Solar</a>
-      <a href="#tools">🔧 Tools</a>
-      <a href="#contact">📍 Contact</a>
+      <a href="#solar">☀️ Solar Product</a>
+      <a href="#tools">🔧 Tools Product</a>
+      <a href="#articles">📰 News & Articles</a>
     </nav>
 
-    <div id="no-results" class="hidden">
-      No products found matching your search.
-    </div>
+    <div class="main-container">
+      
+      <div id="no-results" class="hidden">
+        No items found matching your search or date range.
+      </div>
 
-    <h2 class="section-title" id="solar">Solar Power</h2>
-    <div class="catalog-grid">
-      <div class="product-card">
-        <img
-          src="5kva-inverter.jpeg"
-          alt="5kW Solar Inverter"
-          class="product-image"
-          onerror="this.src = 'https://placehold.co/600x400?text=No+Image'"
-        />
-        <div class="product-info">
-          <h3>5kW Hybrid Inverter</h3>
-          <p>Perfect for off-grid homes. High efficiency.</p>
-          <div class="product-price">N$ 12,500</div>
-          <div>
-            <span class="tag">#Solar</span><span class="tag">#New</span>
+      <h2 class="section-label" id="solar">Featured Products</h2>
+      <div class="catalog-grid">
+        
+        <div class="product-card searchable-item" data-tags="solar, energy, power">
+          <img src="https://via.placeholder.com/400x300?text=Inverter" class="product-image" alt="Inverter">
+          <div class="product-info">
+            <h3>5kW Hybrid Inverter</h3>
+            <p>Off-grid ready system.</p>
+            <div class="price">N$ 12,500</div>
+            <div class="tag-container">
+              <span class="tag">#Solar</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="btn-action btn-call">Call</a>
+            <a href="#" class="btn-action btn-wa">App</a>
+            <a href="#" class="btn-action btn-email">Email</a>
           </div>
         </div>
-        <div class="card-actions">
-          <a href="tel:+264811234567" class="btn-action btn-call"
-            ><span>📞</span>Call</a
-          >
-          <a
-            href="https://wa.me/264811234567?text=Interested in Inverter"
-            class="btn-action btn-whatsapp"
-            ><span>💬</span>App</a
-          >
-          <a
-            href="mailto:info@namib.com.na?subject=Inquiry"
-            class="btn-action btn-email"
-            ><span>✉️</span>Email</a
-          >
-        </div>
-      </div>
-    </div>
 
-    <h2 class="section-title" id="tools">Hardware Tools</h2>
-    <div class="catalog-grid">
-      <div class="product-card">
-        <img
-          src="heavyduty-drill.jpeg"
-          alt="Heavy Duty Power Drill"
-          class="product-image"
-          onerror="this.src = 'https://placehold.co/600x400?text=No+Image'"
-        />
-        <div class="product-info">
-          <h3>Heavy Duty Drill</h3>
-          <p>Heavy-duty 220V power drill</p>
-          <div class="product-price">N$ 2,100</div>
-          <div>
-            <span class="tag">#Tools</span><span class="tag">#Sale</span>
+        <div class="product-card searchable-item" data-tags="tools, drill, hardware">
+          <img src="https://via.placeholder.com/400x300?text=Drill" class="product-image" alt="Drill">
+          <div class="product-info">
+            <h3>Heavy Duty Drill</h3>
+            <p>220V Impact Drill.</p>
+            <div class="price">N$ 2,100</div>
+            <div class="tag-container">
+              <span class="tag">#Tools</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="btn-action btn-call">Call</a>
+            <a href="#" class="btn-action btn-wa">App</a>
+            <a href="#" class="btn-action btn-email">Email</a>
           </div>
         </div>
-        <div class="card-actions">
-          <a href="tel:+264811234567" class="btn-action btn-call"
-            ><span>📞</span>Call</a
-          >
-          <a
-            href="https://wa.me/264811234567?text=Interested in Drill"
-            class="btn-action btn-whatsapp"
-            ><span>💬</span>App</a
-          >
-          <a
-            href="mailto:info@namib.com.na?subject=Inquiry"
-            class="btn-action btn-email"
-            ><span>✉️</span>Email</a
-          >
-        </div>
-      </div>
-    </div>
 
-    <footer id="contact">
-      <p><strong>Namib Industrial Supplies</strong></p>
-      <p>Walvis Bay, Namibia</p>
-      <br />
-      <p style="font-size: 0.8rem">&copy; 2026 All Rights Reserved.</p>
+      </div>
+
+      <h2 class="section-label" id="articles">Latest Articles</h2>
+      <div class="catalog-grid">
+
+        <div class="article-card searchable-item" data-tags="solar, installation, project" data-date="2023-11-15">
+          <div class="article-media">
+            <img src="https://via.placeholder.com/600x400?text=Solar+Project" class="article-main-image" alt="Solar Site">
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span>2023-11-15</span> </div>
+            <h3 class="article-title">New Solar Farm in Erongo</h3>
+            <p class="article-excerpt">
+              We completed a major installation this week. The new panels provide 50% more efficiency...
+            </p>
+            <div class="tag-container">
+              <span class="tag">#Project</span> <span class="tag">#Solar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card searchable-item" data-tags="maintenance, tips, tools" data-date="2023-10-02">
+          <div class="article-media">
+            <img src="https://via.placeholder.com/600x400?text=Workshop" class="article-main-image" style="height: 160px;" alt="Workshop">
+            <div class="article-gallery-strip">
+              <img src="https://via.placeholder.com/100?text=1" alt="detail">
+              <img src="https://via.placeholder.com/100?text=2" alt="detail">
+              <img src="https://via.placeholder.com/100?text=3" alt="detail">
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span>2023-10-02</span>
+            </div>
+            <h3 class="article-title">5 Maintenance Tips</h3>
+            <p class="article-excerpt">
+              How to keep your hardware running for years. Cleaning and oiling guides...
+            </p>
+            <div class="tag-container">
+              <span class="tag">#Tips</span> <span class="tag">#Maintenance</span>
+            </div>
+          </div>
+        </div>
+
+      </div> </div> <footer>
+      &copy; 2025 Namib Industrial Supplies
     </footer>
 
     <script>
-      function filterProducts() {
-        let input = document
-          .getElementById("catalogSearch")
-          .value.toLowerCase();
-        let cards = document.getElementsByClassName("product-card");
+      function runSearch() {
+        // 1. GET VALUES FROM INPUTS
+        const searchInput = document.getElementById("searchInput").value.toLowerCase();
+        const dateStartVal = document.getElementById("dateStart").value;
+        const dateEndVal = document.getElementById("dateEnd").value;
+
+        // Convert date inputs to actual Date objects for comparison
+        const startDate = dateStartVal ? new Date(dateStartVal) : null;
+        const endDate = dateEndVal ? new Date(dateEndVal) : null;
+
+        // 2. GET ALL ITEMS
+        // We select everything with class "searchable-item" (both products and articles)
+        const items = document.getElementsByClassName("searchable-item");
         let foundCount = 0;
 
-        for (let i = 0; i < cards.length; i++) {
-          let cardText = cards[i].innerText.toLowerCase();
-          if (cardText.includes(input)) {
-            cards[i].classList.remove("hidden");
+        // 3. LOOP THROUGH ITEMS
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          let isMatch = true;
+
+          // --- A. TEXT & TAG FILTER ---
+          // Combine inner text and data-tags for search
+          const contentText = item.innerText.toLowerCase();
+          const tags = item.getAttribute("data-tags") ? item.getAttribute("data-tags").toLowerCase() : "";
+          
+          if (searchInput && !contentText.includes(searchInput) && !tags.includes(searchInput)) {
+            isMatch = false;
+          }
+
+          // --- B. DATE FILTER (Only applies if item has a date) ---
+          const itemDateStr = item.getAttribute("data-date");
+          
+          if (itemDateStr) {
+            const itemDate = new Date(itemDateStr);
+            
+            // If Start Date is set, and Item Date is before it -> HIDE
+            if (startDate && itemDate < startDate) {
+              isMatch = false;
+            }
+            // If End Date is set, and Item Date is after it -> HIDE
+            if (endDate && itemDate > endDate) {
+              isMatch = false;
+            }
+          } else {
+            // LOGIC DECISION: 
+            // If the item is a PRODUCT (no date) and the user sets a Date Filter,
+            // do we hide the product? 
+            // Current Logic: If user sets a Date Filter, we assume they only want 
+            // dated items (Articles). So we hide items without dates.
+            if (startDate || endDate) {
+              isMatch = false;
+            }
+          }
+
+          // --- C. APPLY VISIBILITY ---
+          if (isMatch) {
+            item.classList.remove("hidden");
             foundCount++;
           } else {
-            cards[i].classList.add("hidden");
+            item.classList.add("hidden");
           }
         }
 
-        // Toggle the "No Results" message
-        let noResultsMsg = document.getElementById("no-results");
+        // 4. HANDLE "NO RESULTS" MESSAGE
+        const noResults = document.getElementById("no-results");
         if (foundCount === 0) {
-          noResultsMsg.classList.remove("hidden");
+          noResults.classList.remove("hidden");
         } else {
-          noResultsMsg.classList.add("hidden");
+          noResults.classList.add("hidden");
         }
       }
     </script>
