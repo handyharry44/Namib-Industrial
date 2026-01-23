@@ -97,6 +97,12 @@
       .article-card { border-top: 5px solid var(--brand-blue); }
       .article-body { padding: 20px; flex-grow: 1; }
       .article-date { font-size: 0.8rem; color: #888; font-weight: bold; }
+      
+      /* Read Time Styling */
+      .read-time-badge {
+        font-size: 0.75rem; color: #999; display: flex; align-items: center; gap: 4px; margin-top: 4px;
+      }
+
       .btn-read-more { 
         background: none; border: 2px solid var(--brand-blue); color: var(--brand-blue); 
         padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; 
@@ -119,7 +125,6 @@
       }
       .modal-image.zoomed { transform: scale(1.5); height: 400px; cursor: zoom-out; object-fit: contain; }
 
-      /* SHARE STYLES */
       .share-section {
         margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; text-align: center;
       }
@@ -137,7 +142,7 @@
       footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: auto; }
     </style>
   </head>
-  <body>
+  <body onload="calculateReadTimes()">
     <header>
       <div class="header-content">
         <div class="logo-wrapper">
@@ -180,10 +185,11 @@
           </div>
           <div class="article-body">
             <span class="article-date">Jan 15, 2024</span>
+            <div class="read-time-badge">⏱ <span class="time-value">...</span></div>
             <h3 class="item-title">Sustainable Solar Power</h3>
             <p>Providing power to Western Namibia households.</p>
             <div class="hidden-full-content hidden">
-              <p>State-of-the-art battery arrays for high-heat desert environments.</p>
+              <p>State-of-the-art battery arrays for high-heat desert environments. This project focuses on the long-term sustainability of lithium-iron-phosphate storage in temperatures exceeding 40 degrees Celsius. We have implemented custom cooling vents that utilize passive airflow to maintain peak efficiency without extra energy cost. This makes the system ideal for rural Namibia where maintenance visits are difficult to schedule regularly.</p>
             </div>
             <button class="btn-read-more" onclick="openModal(this)">Read More</button>
           </div>
@@ -197,10 +203,11 @@
           </div>
           <div class="article-body">
             <span class="article-date">Dec 10, 2023</span>
+            <div class="read-time-badge">⏱ <span class="time-value">...</span></div>
             <h3 class="item-title">Top 5 Safety Protocols</h3>
             <p>Safety culture and essential gear for site managers.</p>
             <div class="hidden-full-content hidden">
-              <p>Essential safety guidelines for Namibian industrial sites.</p>
+              <p>Essential safety guidelines for Namibian industrial sites. Safety is not a checklist; it's a behavior. We analyze how high-visibility gear and proper hydration schedules reduce on-site accidents by 30%.</p>
             </div>
             <button class="btn-read-more" onclick="openModal(this)">Read More</button>
           </div>
@@ -221,6 +228,17 @@
     </footer>
 
     <script>
+      // NEW: Function to automatically calculate read times based on word count
+      function calculateReadTimes() {
+        const cards = document.querySelectorAll('.article-card');
+        cards.forEach(card => {
+          const content = card.querySelector('.hidden-full-content').innerText;
+          const words = content.split(/\s+/).length; // Split by space to count words
+          const minutes = Math.ceil(words / 200); // 200 words per minute average
+          card.querySelector('.time-value').innerText = `${minutes} min read`;
+        });
+      }
+
       function runSearch() {
         const query = document.getElementById("searchInput").value.toLowerCase();
         const start = document.getElementById("dateStart").value;
@@ -244,8 +262,8 @@
         const date = card.querySelector(".article-date").innerText;
         const imageSrc = card.querySelector(".article-img").src;
         const fullContent = card.querySelector(".hidden-full-content").innerHTML;
+        const readTime = card.querySelector('.time-value').innerText;
         
-        // Prepare Share Links
         const shareText = encodeURIComponent("Check out this article from Namib Industrial: " + title);
         const currentURL = encodeURIComponent(window.location.href);
         const waLink = `https://wa.me/?text=${shareText}%20${currentURL}`;
@@ -253,7 +271,10 @@
 
         document.getElementById("modalBody").innerHTML = `
           <img src="${imageSrc}" class="modal-image" onclick="toggleZoom(this)">
-          <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+             <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
+             <small style="color:#aaa;">${readTime}</small>
+          </div>
           <h2 style="margin: 10px 0 10px 0;">${title}</h2>
           <div style="line-height:1.6; color:#444;">${fullContent}</div>
           
