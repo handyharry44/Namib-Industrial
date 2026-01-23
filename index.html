@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Namibia Industrial Catalog & News">
+    <meta name="description" content="Namibia Industrial Catalog & News" />
     <title>Namibia Industrial - Full Demo</title>
     <style>
       /* --- 1. GLOBAL SETTINGS --- */
@@ -16,7 +16,10 @@
         scroll-behavior: smooth;
       }
       body {
-        font-family: system-ui, -apple-system, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
         background-color: #f4f4f4;
         color: #333;
         line-height: 1.6;
@@ -62,7 +65,7 @@
         top: 0;
         z-index: 1000;
         padding: 15px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
 
       .filter-container {
@@ -82,7 +85,7 @@
         border-radius: 8px;
         font-size: 1rem;
       }
-      
+
       .search-input:focus {
         border-color: #008751;
         outline: none;
@@ -121,9 +124,9 @@
         border: 1px solid #ddd;
         white-space: nowrap;
       }
-      
+
       .category-bar a:hover {
-          background-color: #e2e6ea;
+        background-color: #e2e6ea;
       }
 
       /* --- 5. GRID LAYOUT --- */
@@ -154,7 +157,7 @@
         background: white;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         display: flex;
         flex-direction: column;
         border: 1px solid #eee;
@@ -193,22 +196,28 @@
         font-weight: bold;
         font-size: 0.8rem;
       }
-      .btn-call { background: #008751; }
-      .btn-wa { background: #25d366; }
-      .btn-email { background: #3498db; }
+      .btn-call {
+        background: #008751;
+      }
+      .btn-wa {
+        background: #25d366;
+      }
+      .btn-email {
+        background: #3498db;
+      }
 
       /* --- 7. ARTICLE CARD (Reading - NEW TEMPLATE) --- */
       /* Note: This has the specific styles for your articles */
-      
+
       .article-card {
         background: white;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         display: flex;
         flex-direction: column;
         /* Green border on left to distinguish it from a product */
-        border-left: 5px solid #008751; 
+        border-left: 5px solid #008751;
         transition: transform 0.2s;
       }
 
@@ -277,7 +286,7 @@
         padding-top: 10px;
         border-top: 1px solid #f0f0f0;
       }
-      
+
       .tag {
         display: inline-block;
         background: #eef2ff;
@@ -290,8 +299,10 @@
       }
 
       /* --- 8. UTILITIES --- */
-      .hidden { display: none !important; }
-      
+      .hidden {
+        display: none !important;
+      }
+
       #no-results {
         text-align: center;
         padding: 40px;
@@ -310,10 +321,9 @@
     </style>
   </head>
   <body>
-
     <header>
       <div class="header-content">
-        <div style="font-size:3rem;">🇳🇦</div>
+        <div style="font-size: 3rem">🇳🇦</div>
         <div class="header-text">
           <h1>Namib Industrial</h1>
           <p>Catalog & News Feed</p>
@@ -323,26 +333,26 @@
 
     <div class="filter-section">
       <div class="filter-container">
-        <input 
-          type="search" 
-          id="searchInput" 
-          class="search-input" 
-          placeholder="🔍 Search products or articles..." 
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="🔍 Search products or articles..."
           onkeyup="runSearch()"
         />
-        
-        <input 
-          type="date" 
-          id="dateStart" 
-          class="date-input" 
+
+        <input
+          type="date"
+          id="dateStart"
+          class="date-input"
           title="From Date"
           onchange="runSearch()"
         />
 
-        <input 
-          type="date" 
-          id="dateEnd" 
-          class="date-input" 
+        <input
+          type="date"
+          id="dateEnd"
+          class="date-input"
           title="To Date"
           onchange="runSearch()"
         />
@@ -356,16 +366,17 @@
     </nav>
 
     <div class="main-container">
-      
       <div id="no-results" class="hidden">
         No items found matching your search or date range.
       </div>
 
       <h2 class="section-label" id="solar">Featured Products</h2>
       <div class="catalog-grid">
-        
-        <div class="product-card searchable-item" data-tags="solar, energy, power">
-          <img src="https://via.placeholder.com/400x300?text=Inverter" class="product-image" alt="Inverter">
+        <div
+          class="product-card searchable-item"
+          data-tags="solar, energy, power"
+        >
+          <img src="5kva-inverter.jpeg" class="product-image" alt="Inverter" />
           <div class="product-info">
             <h3>5kW Hybrid Inverter</h3>
             <p>Off-grid ready system.</p>
@@ -381,8 +392,11 @@
           </div>
         </div>
 
-        <div class="product-card searchable-item" data-tags="tools, drill, hardware">
-          <img src="https://via.placeholder.com/400x300?text=Drill" class="product-image" alt="Drill">
+        <div
+          class="product-card searchable-item"
+          data-tags="tools, drill, hardware"
+        >
+          <img src="heavyduty-drill.jpeg" class="product-image" alt="Drill" />
           <div class="product-info">
             <h3>Heavy Duty Drill</h3>
             <p>220V Impact Drill.</p>
@@ -397,22 +411,30 @@
             <a href="#" class="btn-action btn-email">Email</a>
           </div>
         </div>
-
       </div>
 
       <h2 class="section-label" id="articles">Latest Articles</h2>
       <div class="catalog-grid">
-
-        <div class="article-card searchable-item" data-tags="solar, installation, project" data-date="2023-11-15">
+        <div
+          class="article-card searchable-item"
+          data-tags="solar, installation, project"
+          data-date="2023-11-15"
+        >
           <div class="article-media">
-            <img src="https://via.placeholder.com/600x400?text=Solar+Project" class="article-main-image" alt="Solar Site">
+            <img
+              src="https://via.placeholder.com/600x400?text=Solar+Project"
+              class="article-main-image"
+              alt="Solar Site"
+            />
           </div>
           <div class="article-content">
             <div class="article-meta">
-              <span>2023-11-15</span> </div>
+              <span>2023-11-15</span>
+            </div>
             <h3 class="article-title">New Solar Farm in Erongo</h3>
             <p class="article-excerpt">
-              We completed a major installation this week. The new panels provide 50% more efficiency...
+              We completed a major installation this week. The new panels
+              provide 50% more efficiency...
             </p>
             <div class="tag-container">
               <span class="tag">#Project</span> <span class="tag">#Solar</span>
@@ -420,13 +442,22 @@
           </div>
         </div>
 
-        <div class="article-card searchable-item" data-tags="maintenance, tips, tools" data-date="2023-10-02">
+        <div
+          class="article-card searchable-item"
+          data-tags="maintenance, tips, tools"
+          data-date="2023-10-02"
+        >
           <div class="article-media">
-            <img src="https://via.placeholder.com/600x400?text=Workshop" class="article-main-image" style="height: 160px;" alt="Workshop">
+            <img
+              src="https://via.placeholder.com/600x400?text=Workshop"
+              class="article-main-image"
+              style="height: 160px"
+              alt="Workshop"
+            />
             <div class="article-gallery-strip">
-              <img src="https://via.placeholder.com/100?text=1" alt="detail">
-              <img src="https://via.placeholder.com/100?text=2" alt="detail">
-              <img src="https://via.placeholder.com/100?text=3" alt="detail">
+              <img src="https://via.placeholder.com/100?text=1" alt="detail" />
+              <img src="https://via.placeholder.com/100?text=2" alt="detail" />
+              <img src="https://via.placeholder.com/100?text=3" alt="detail" />
             </div>
           </div>
           <div class="article-content">
@@ -435,22 +466,25 @@
             </div>
             <h3 class="article-title">5 Maintenance Tips</h3>
             <p class="article-excerpt">
-              How to keep your hardware running for years. Cleaning and oiling guides...
+              How to keep your hardware running for years. Cleaning and oiling
+              guides...
             </p>
             <div class="tag-container">
-              <span class="tag">#Tips</span> <span class="tag">#Maintenance</span>
+              <span class="tag">#Tips</span>
+              <span class="tag">#Maintenance</span>
             </div>
           </div>
         </div>
-
-      </div> </div> <footer>
-      &copy; 2025 Namib Industrial Supplies
-    </footer>
+      </div>
+    </div>
+    <footer>&copy; 2025 Namib Industrial Supplies</footer>
 
     <script>
       function runSearch() {
         // 1. GET VALUES FROM INPUTS
-        const searchInput = document.getElementById("searchInput").value.toLowerCase();
+        const searchInput = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
         const dateStartVal = document.getElementById("dateStart").value;
         const dateEndVal = document.getElementById("dateEnd").value;
 
@@ -471,18 +505,24 @@
           // --- A. TEXT & TAG FILTER ---
           // Combine inner text and data-tags for search
           const contentText = item.innerText.toLowerCase();
-          const tags = item.getAttribute("data-tags") ? item.getAttribute("data-tags").toLowerCase() : "";
-          
-          if (searchInput && !contentText.includes(searchInput) && !tags.includes(searchInput)) {
+          const tags = item.getAttribute("data-tags")
+            ? item.getAttribute("data-tags").toLowerCase()
+            : "";
+
+          if (
+            searchInput &&
+            !contentText.includes(searchInput) &&
+            !tags.includes(searchInput)
+          ) {
             isMatch = false;
           }
 
           // --- B. DATE FILTER (Only applies if item has a date) ---
           const itemDateStr = item.getAttribute("data-date");
-          
+
           if (itemDateStr) {
             const itemDate = new Date(itemDateStr);
-            
+
             // If Start Date is set, and Item Date is before it -> HIDE
             if (startDate && itemDate < startDate) {
               isMatch = false;
@@ -492,10 +532,10 @@
               isMatch = false;
             }
           } else {
-            // LOGIC DECISION: 
+            // LOGIC DECISION:
             // If the item is a PRODUCT (no date) and the user sets a Date Filter,
-            // do we hide the product? 
-            // Current Logic: If user sets a Date Filter, we assume they only want 
+            // do we hide the product?
+            // Current Logic: If user sets a Date Filter, we assume they only want
             // dated items (Articles). So we hide items without dates.
             if (startDate || endDate) {
               isMatch = false;
