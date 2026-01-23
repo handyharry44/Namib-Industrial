@@ -83,21 +83,19 @@
         letter-spacing: 1px;
       }
 
-      /* --- UPDATED FILTER SECTION --- */
+      /* --- 3. UPDATED FILTER SECTION (The "Dropdown" Fix) --- */
       .filter-section {
         background: white;
         position: sticky;
         top: 0;
         z-index: 1000;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid #eee;
       }
 
-      /* The Toggle Button (Hidden on Desktop) */
       .filter-toggle {
-        display: none;
+        display: none; /* Hidden on desktop */
         width: 100%;
-        padding: 15px;
+        padding: 15px 20px;
         background: white;
         border: none;
         font-weight: bold;
@@ -114,7 +112,7 @@
         display: flex;
         padding: 15px;
         gap: 10px;
-        transition: all 0.3s ease-in-out;
+        align-items: flex-end; /* Aligns inputs nicely on desktop */
       }
 
       .date-group {
@@ -123,22 +121,38 @@
         flex: 1;
       }
 
+      .search-input {
+        flex: 2;
+      }
+
+      .search-input,
+      .date-input {
+        padding: 10px;
+        font-size: 0.9rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        width: 100%;
+      }
+
       /* MOBILE SPECIFIC OVERRIDES */
-      @media (max-width: 600px) {
+      @media (max-width: 768px) {
         .filter-toggle {
-          display: flex; /* Show toggle on mobile */
+          display: flex;
         }
 
         .filter-container {
-          display: none; /* Hide controls by default */
+          display: none; /* Hide by default on mobile */
           flex-direction: column;
-          padding: 0 15px 15px 15px;
+          padding: 10px 20px 20px;
+          animation: slideDown 0.3s ease-out;
         }
 
-        /* Class added via JS to show the menu */
         .filter-container.active {
           display: flex;
-          animation: slideDown 0.3s ease-out;
+        }
+
+        .date-group {
+          width: 100%;
         }
       }
 
@@ -153,13 +167,38 @@
         }
       }
 
-      /* styling the inputs slightly smaller to save space */
-      .search-input,
-      .date-input {
-        padding: 10px !important;
-        font-size: 0.9rem !important;
+      /* --- 4. CARDS & CONTENT --- */
+      .main-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
       }
-      /* Article Specifics */
+
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+      }
+
+      .section-title {
+        color: var(--brand-green);
+        margin: 20px 0;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+        text-transform: uppercase;
+      }
+
+      .searchable-item {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+      }
+
       .article-card {
         border-top: 5px solid var(--brand-blue);
       }
@@ -195,7 +234,6 @@
         transition: 0.3s;
         margin-top: 10px;
       }
-
       .btn-read-more:hover {
         background: var(--brand-blue);
         color: white;
@@ -211,7 +249,7 @@
         color: #666;
       }
 
-      /* --- 5. MODAL (READ MORE POPUP) --- */
+      /* --- 5. MODAL --- */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -219,13 +257,12 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.8);
-        display: none; /* Hidden by default */
+        display: none;
         justify-content: center;
         align-items: center;
         z-index: 2000;
         padding: 20px;
       }
-
       .modal-content {
         background: white;
         width: 100%;
@@ -236,7 +273,6 @@
         position: relative;
         padding: 30px;
       }
-
       .close-modal {
         position: absolute;
         top: 15px;
@@ -245,12 +281,10 @@
         cursor: pointer;
         color: #333;
       }
-
       .hidden {
         display: none !important;
       }
 
-      /* --- 6. FOOTER --- */
       footer {
         background: #333;
         color: white;
@@ -286,7 +320,12 @@
     </header>
 
     <div class="filter-section">
-      <div class="filter-container">
+      <button class="filter-toggle" onclick="toggleFilter()">
+        <span>🔍 Search & Filter Tools</span>
+        <span id="toggle-icon">▼</span>
+      </button>
+
+      <div class="filter-container" id="filterControls">
         <input
           type="search"
           id="searchInput"
@@ -294,18 +333,20 @@
           placeholder="🔍 Search news & tools..."
           onkeyup="runSearch()"
         />
-        <input
-          type="date"
-          id="dateStart"
-          class="date-input"
-          onchange="runSearch()"
-        />
-        <input
-          type="date"
-          id="dateEnd"
-          class="date-input"
-          onchange="runSearch()"
-        />
+        <div class="date-group">
+          <input
+            type="date"
+            id="dateStart"
+            class="date-input"
+            onchange="runSearch()"
+          />
+          <input
+            type="date"
+            id="dateEnd"
+            class="date-input"
+            onchange="runSearch()"
+          />
+        </div>
       </div>
     </div>
 
@@ -330,16 +371,13 @@
             </h3>
             <p class="article-excerpt">
               Our team recently completed one of the largest off-grid solar
-              arrays in Western Namibia, providing power to over 50
-              households...
+              arrays in Western Namibia...
             </p>
             <div class="hidden-full-content hidden">
               <p>
                 The project involved 200 high-efficiency panels and a
                 centralized battery storage system. By utilizing the intense
-                Namibian sun, we've reduced carbon emissions by approximately 40
-                tons per year. The local community has been trained to perform
-                basic maintenance, ensuring long-term sustainability.
+                Namibian sun, we've reduced carbon emissions significantly.
               </p>
               <br />
               <img
@@ -370,16 +408,13 @@
             <span class="article-date">Dec 10, 2023</span>
             <h3 class="item-title">Top 5 Safety Protocols for Site Managers</h3>
             <p class="article-excerpt">
-              Safety isn't just a policy; it's a culture. We break down the
-              essential gear and checks for 2024...
+              Safety isn't just a policy; it's a culture. Essential gear and
+              checks for 2024...
             </p>
             <div class="hidden-full-content hidden">
               <p>
-                Site safety in the industrial sector remains our top priority.
-                1. Always check PPE integrity. 2. Ensure clear communication via
-                high-vis signaling. 3. Regular tool calibration. 4. Hydration in
-                the Namib heat. 5. Clear emergency exit routes. Following these
-                simple steps reduces site accidents by 65%.
+                1. Always check PPE integrity. 2. Clear communication. 3.
+                Regular tool calibration. 4. Hydration in heat.
               </p>
             </div>
             <div>
@@ -402,7 +437,7 @@
     </div>
 
     <footer>
-      <p>&copy; 2026 Namib Industrial Supplies - Windhoek, Namibia</p>
+      <p>&copy; 2026 Namib Industrial Supplies - Namibia</p>
     </footer>
 
     <script>
@@ -417,25 +452,18 @@
 
         for (let item of items) {
           let text = item.innerText.toLowerCase();
-
-          // We use a fallback empty string "" if data-tags doesn't exist on an item
           let tags = item.getAttribute("data-tags")
             ? item.getAttribute("data-tags").toLowerCase()
             : "";
-
-          // Get the date attribute
           let dateAttr = item.getAttribute("data-date");
           let itemDate = dateAttr ? new Date(dateAttr) : null;
 
           let matchesText = text.includes(query) || tags.includes(query);
-
-          // Date Range Logic
           let matchesStart = true;
           let matchesEnd = true;
 
           if (start || end) {
             if (!itemDate) {
-              // If the user picks a date but the item (like a product) has no date, hide it
               matchesStart = false;
             } else {
               if (start) matchesStart = itemDate >= new Date(start);
@@ -461,16 +489,14 @@
           ".hidden-full-content",
         ).innerHTML;
 
-        // Build the content inside the Modal
         document.getElementById("modalBody").innerHTML = `
-      <img src="${imageSrc}" style="width:100%; height:300px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
-      <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
-      <h2 style="margin: 10px 0 20px 0;">${title}</h2>
-      <div style="line-height:1.8; color:#444;">${fullContent}</div>
-    `;
-
+          <img src="${imageSrc}" style="width:100%; height:300px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
+          <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
+          <h2 style="margin: 10px 0 20px 0;">${title}</h2>
+          <div style="line-height:1.8; color:#444;">${fullContent}</div>
+        `;
         document.getElementById("modalOverlay").style.display = "flex";
-        document.body.style.overflow = "hidden"; // Prevent background scroll
+        document.body.style.overflow = "hidden";
       }
 
       function closeModal() {
@@ -478,20 +504,12 @@
         document.body.style.overflow = "auto";
       }
 
-      // 3. NEW: TOGGLE FILTER MENU (FOR MOBILE)
+      // 3. TOGGLE FILTER MENU
       function toggleFilter() {
         const controls = document.getElementById("filterControls");
         const icon = document.getElementById("toggle-icon");
-
-        // This toggles the 'active' class we defined in the CSS
         controls.classList.toggle("active");
-
-        // Change the arrow direction so the user knows if it's open or closed
-        if (controls.classList.contains("active")) {
-          icon.innerText = "▲";
-        } else {
-          icon.innerText = "▼";
-        }
+        icon.innerText = controls.classList.contains("active") ? "▲" : "▼";
       }
     </script>
   </body>
