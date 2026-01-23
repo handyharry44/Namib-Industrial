@@ -97,10 +97,18 @@
       .article-card { border-top: 5px solid var(--brand-blue); }
       .article-body { padding: 20px; flex-grow: 1; }
       .article-date { font-size: 0.8rem; color: #888; font-weight: bold; }
-      .read-time-badge { font-size: 0.75rem; color: #999; display: flex; align-items: center; gap: 4px; margin-top: 4px; }
-      .btn-read-more { background: none; border: 2px solid var(--brand-blue); color: var(--brand-blue); padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+      
+      /* Read Time Styling */
+      .read-time-badge {
+        font-size: 0.75rem; color: #999; display: flex; align-items: center; gap: 4px; margin-top: 4px;
+      }
 
-      /* --- 7. MODAL & SHARE --- */
+      .btn-read-more { 
+        background: none; border: 2px solid var(--brand-blue); color: var(--brand-blue); 
+        padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; 
+      }
+
+      /* --- 7. MODAL & ZOOM & SHARE --- */
       .modal-overlay { 
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
         background: rgba(0, 0, 0, 0.8); display: none; justify-content: center; 
@@ -121,37 +129,20 @@
         margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; text-align: center;
       }
       .share-label { font-size: 0.8rem; font-weight: bold; color: #777; margin-bottom: 10px; display: block; }
-      .share-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-      
+      .share-buttons { display: flex; justify-content: center; gap: 15px; }
       .btn-share {
         text-decoration: none; padding: 8px 15px; border-radius: 20px; font-size: 0.85rem;
-        font-weight: bold; color: white; transition: 0.3s; cursor: pointer; border: none;
+        font-weight: bold; color: white; transition: 0.3s;
       }
       .btn-whatsapp { background: var(--whatsapp); }
       .btn-linkedin { background: var(--linkedin); }
-      .btn-copy { background: var(--brand-blue); }
       .btn-share:hover { opacity: 0.8; transform: translateY(-2px); }
-
-      /* --- 8. FLOATING CONTACT BUTTON --- */
-      .contact-fab {
-        position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
-        background-color: var(--brand-red); border-radius: 50%; display: flex;
-        justify-content: center; align-items: center; color: white;
-        text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        z-index: 3000; animation: fabPulse 2s infinite; font-weight: bold;
-      }
-      @keyframes fabPulse {
-        0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        50% { transform: scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-        100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-      }
 
       .hidden { display: none !important; }
       footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: auto; }
     </style>
   </head>
   <body onload="calculateReadTimes()">
-
     <header>
       <div class="header-content">
         <div class="logo-wrapper">
@@ -198,7 +189,7 @@
             <h3 class="item-title">Sustainable Solar Power</h3>
             <p>Providing power to Western Namibia households.</p>
             <div class="hidden-full-content hidden">
-              <p>State-of-the-art battery arrays for high-heat desert environments. This project focuses on lithium-iron-phosphate storage in temperatures exceeding 40°C.</p>
+              <p>State-of-the-art battery arrays for high-heat desert environments. This project focuses on the long-term sustainability of lithium-iron-phosphate storage in temperatures exceeding 40 degrees Celsius. We have implemented custom cooling vents that utilize passive airflow to maintain peak efficiency without extra energy cost. This makes the system ideal for rural Namibia where maintenance visits are difficult to schedule regularly.</p>
             </div>
             <button class="btn-read-more" onclick="openModal(this)">Read More</button>
           </div>
@@ -216,7 +207,7 @@
             <h3 class="item-title">Top 5 Safety Protocols</h3>
             <p>Safety culture and essential gear for site managers.</p>
             <div class="hidden-full-content hidden">
-              <p>Safety is behavior. High-visibility gear and hydration schedules reduce accidents by 30% in Namibian industrial landscapes.</p>
+              <p>Essential safety guidelines for Namibian industrial sites. Safety is not a checklist; it's a behavior. We analyze how high-visibility gear and proper hydration schedules reduce on-site accidents by 30%.</p>
             </div>
             <button class="btn-read-more" onclick="openModal(this)">Read More</button>
           </div>
@@ -224,8 +215,6 @@
 
       </div>
     </div>
-
-    <a href="mailto:info@namibindustrial.com" class="contact-fab" title="Contact Us">✉</a>
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
       <div class="modal-content" onclick="event.stopPropagation()">
@@ -239,12 +228,13 @@
     </footer>
 
     <script>
+      // NEW: Function to automatically calculate read times based on word count
       function calculateReadTimes() {
         const cards = document.querySelectorAll('.article-card');
         cards.forEach(card => {
           const content = card.querySelector('.hidden-full-content').innerText;
-          const words = content.split(/\s+/).length;
-          const minutes = Math.ceil(words / 200);
+          const words = content.split(/\s+/).length; // Split by space to count words
+          const minutes = Math.ceil(words / 200); // 200 words per minute average
           card.querySelector('.time-value').innerText = `${minutes} min read`;
         });
       }
@@ -274,25 +264,25 @@
         const fullContent = card.querySelector(".hidden-full-content").innerHTML;
         const readTime = card.querySelector('.time-value').innerText;
         
-        const currentURL = window.location.href;
-        const shareText = encodeURIComponent("Namib Industrial Insight: " + title);
-        const waLink = `https://wa.me/?text=${shareText}%20${encodeURIComponent(currentURL)}`;
-        const liLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentURL)}`;
+        const shareText = encodeURIComponent("Check out this article from Namib Industrial: " + title);
+        const currentURL = encodeURIComponent(window.location.href);
+        const waLink = `https://wa.me/?text=${shareText}%20${currentURL}`;
+        const liLink = `https://www.linkedin.com/sharing/share-offsite/?url=${currentURL}`;
 
         document.getElementById("modalBody").innerHTML = `
           <img src="${imageSrc}" class="modal-image" onclick="toggleZoom(this)">
-          <div style="display:flex; justify-content:space-between;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
              <small style="color:var(--brand-green); font-weight:bold;">${date}</small>
              <small style="color:#aaa;">${readTime}</small>
           </div>
-          <h2 style="margin: 10px 0;">${title}</h2>
+          <h2 style="margin: 10px 0 10px 0;">${title}</h2>
           <div style="line-height:1.6; color:#444;">${fullContent}</div>
+          
           <div class="share-section">
-            <span class="share-label">SHARE OR COPY LINK</span>
+            <span class="share-label">SHARE THIS ARTICLE</span>
             <div class="share-buttons">
               <a href="${waLink}" target="_blank" class="btn-share btn-whatsapp">WhatsApp</a>
               <a href="${liLink}" target="_blank" class="btn-share btn-linkedin">LinkedIn</a>
-              <button onclick="copyToClipboard(this, '${currentURL}')" class="btn-share btn-copy">Copy Link</button>
             </div>
           </div>
         `;
@@ -300,23 +290,15 @@
         document.body.style.overflow = "hidden";
       }
 
-      function copyToClipboard(button, text) {
-        navigator.clipboard.writeText(text).then(() => {
-          const originalText = button.innerText;
-          button.innerText = "Copied!";
-          button.style.backgroundColor = "#28a745";
-          setTimeout(() => {
-            button.innerText = originalText;
-            button.style.backgroundColor = "var(--brand-blue)";
-          }, 2000);
-        });
+      function toggleZoom(imgElement) {
+        imgElement.classList.toggle("zoomed");
       }
 
-      function toggleZoom(imgElement) { imgElement.classList.toggle("zoomed"); }
       function closeModal() {
         document.getElementById("modalOverlay").style.display = "none";
         document.body.style.overflow = "auto";
       }
+
       function toggleFilter() {
         const controls = document.getElementById("filterControls");
         controls.classList.toggle("active");
